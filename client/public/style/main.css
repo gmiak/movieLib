@@ -1,0 +1,10 @@
+.navbar-bgcolor {
+    background-color: #F2F2F2;
+}
+.navbar-brand {
+    font-family:'Times New Roman', Times, serif
+}
+
+.active i {
+    color: #E2B62F; 
+}

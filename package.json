@@ -1,0 +1,22 @@
+{
+  "name": "movielib",
+  "version": "1.0.0",
+  "description": "Movie Library App",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmiak/movieLib.git"
+  },
+  "author": "Georges Kayembe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmiak/movieLib/issues"
+  },
+  "homepage": "https://github.com/gmiak/movieLib#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
