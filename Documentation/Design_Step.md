@@ -13,15 +13,15 @@ Design Step
 
 * API design:
 
-- A GET request to /movie should return the list of movies
++ A GET request to /movie should return the list of movies
 
-- A POST OR PUT request to /movie should add a new movie. Body of request should be 
++ A POST OR PUT request to /movie should add a new movie. Body of request should be 
 {"titel": string, "year": string, "picture": string, "description": string, "genre": string}
 
-- A DELETE request to /movie/id should delete a movie.
++ A DELETE request to /movie/id should delete a movie.
 
-- A GET request to /movie/favorite should return the list of favorite movies
++ A GET request to /movie/favorite should return the list of favorite movies
 
-- A PUT request to /movie/favorite/id should add a movie into and update the movie favorite status as true. The Body of request should be {"favorite": true}
++ A PUT request to /movie/favorite/id should add a movie into and update the movie favorite status as true. The Body of request should be {"favorite": true}
 
-- A DELETE request to /movie/favorite/id should delete a movie as favorite.
++ A DELETE request to /movie/favorite/id should delete a movie as favorite.
