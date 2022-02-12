@@ -3,13 +3,21 @@ import { Movie } from "../model/movie.interface";
 export class MovieService {
     private movies : { [key: number] : Movie};
 
-    constructor(movies: { [key : number] : Movie}) {
+    private favoriteMovies : { [key: number] : Movie};
+
+    constructor(movies: { [key : number] : Movie}, favoriteMovies: { [key : number] : Movie}) {
         this.movies = movies;
+        this.favoriteMovies = favoriteMovies;
     }
 
-    // GET
+    // GET Movies
     getMovies : () => Promise<Array<Movie>> = async () => {
         return Object.values(this.movies);
+    }
+
+    // GET Favorite Movies
+    getFavoriteMovies : () => Promise<Array<Movie>> = async () => {
+        return Object.values(this.favoriteMovies);
     }
     
     // TODO: Create a list for favorite movies
@@ -39,6 +47,7 @@ export class MovieService {
             return false;
         }
         movie.favorite = true;
+        this.favoriteMovies[movie.id] = movie;
         return true;
     }
     
@@ -50,6 +59,7 @@ export class MovieService {
             return false;
         }
         movie.favorite = false;
+        delete this.favoriteMovies[movie.id];
         return true;
     }
     
@@ -60,6 +70,10 @@ export class MovieService {
         if(!movie) {
             return false;
         }
+        const isFavorit : Movie = this.favoriteMovies[movie.id];
+        if(isFavorit) {
+            delete this.favoriteMovies[movie.id];
+        }
         movie.favorite = false;
         delete this.movies[movie.id];
         return true;
@@ -68,7 +82,7 @@ export class MovieService {
 
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService() : MovieService {
-    return new MovieService({});
+    return new MovieService({}, {});
 }
 
 
