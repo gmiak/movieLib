@@ -1,13 +1,31 @@
 import { Movie } from "../model/movie.interface";
 
+/**
+ *  The Singleton class defines the `getInstance` method that lets clients access
+ * the unique singleton instance. 
+ */
 export class MovieService {
+    private static instance: MovieService;
+
     private movies : { [key: number] : Movie};
 
     private favoriteMovies : { [key: number] : Movie};
 
+    /**
+     * The Singleton's constructor should always be private to prevent direct
+     * construction calls with the `new` operator.
+     */
     constructor(movies: { [key : number] : Movie}, favoriteMovies: { [key : number] : Movie}) {
         this.movies = movies;
         this.favoriteMovies = favoriteMovies;
+    }
+
+    public static getInstance(): MovieService {
+        if (!MovieService.instance) {
+            MovieService.instance = new MovieService({}, {});
+        }
+
+        return MovieService.instance;
     }
 
     // GET Movies
@@ -82,7 +100,7 @@ export class MovieService {
 
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService() : MovieService {
-    return new MovieService({}, {});
+    return MovieService.getInstance();
 }
 
 
