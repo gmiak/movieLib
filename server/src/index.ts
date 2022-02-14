@@ -1,6 +1,6 @@
 import Express from "express";
 import { makeDefaultFavoriteMovieRouter } from "./router/favoriteMovie.router";
-import {makeDefaultMovieRouter} from "./router/movie.router";
+import { makeDefaultMovieRouter } from "./router/movie.router";
 
 const app : Express.Express = Express();
 
