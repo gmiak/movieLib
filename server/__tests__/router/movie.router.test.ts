@@ -1,6 +1,6 @@
 import { Movie } from "../../src/model/movie.interface";
 import { makeMovieRouter } from "../../src/router/movie.router"
-import { MovieService } from "../../src/service/movie.service"
+import { MovieService, makeMovieService } from "../../src/service/movie.service"
 import supertest, { Test, SuperTest} from "supertest"
 import {Express } from "express"
 
@@ -9,9 +9,9 @@ test("A GET request to / should send a response with the list of movies", () => 
         {id : 1, titel : "Superman", year : "1990", description : "Super film", picture : "https://superman.com", genre : "Action", favorite : false},
         {id : 2, titel : "Batman", year : "1999", description : "Super film bre", picture : "https://batman.com", genre : "Action", favorite : false}
     ];
-    class MockMovieService extends MovieService {
+    class MockMovieService  {
         constructor() {
-            super({}, {});
+            makeMovieService;
         }
         
         getMovie : () => Promise<Movie[]> = async () => {

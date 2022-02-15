@@ -15,7 +15,7 @@ export class MovieService {
      * The Singleton's constructor should always be private to prevent direct
      * construction calls with the `new` operator.
      */
-    constructor(movies: { [key : number] : Movie}, favoriteMovies: { [key : number] : Movie}) {
+    private constructor(movies: { [key : number] : Movie}, favoriteMovies: { [key : number] : Movie}) {
         this.movies = movies;
         this.favoriteMovies = favoriteMovies;
     }
