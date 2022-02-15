@@ -1,12 +1,12 @@
 import Express from "express";
 import { Movie } from "../model/movie.interface";
-import { makeMovieService, MovieService } from "../service/movie.service";
+import { IMovieService, makeMovieService, MovieService } from "../service/movie.service";
 
 /** Router is an express server */
 /** For Movie in general */
 
 // Using Dependency Injection
-export function makeMovieRouter(movieService : MovieService) : Express.Express {
+export function makeMovieRouter(movieService : IMovieService) : Express.Express {
     const movieRouter : Express.Express = Express();
 
     // Get /movie router

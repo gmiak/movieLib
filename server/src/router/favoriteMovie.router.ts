@@ -1,10 +1,10 @@
 import Express from "express";
 import { Movie } from "../model/movie.interface";
-import { makeMovieService, MovieService } from "../service/movie.service";
+import { IMovieService, makeMovieService, MovieService } from "../service/movie.service";
 
 /** Router is an express server */
 /** For Movie in general */
-export function makeFavoriteMovieRouter (movieService: MovieService ) {
+export function makeFavoriteMovieRouter (movieService: IMovieService ) {
     const favoriteMovieRouter : Express.Express = Express();
 
     // Get /movie/favorite router
