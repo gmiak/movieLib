@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {MovieList} from './home';
+import {Home} from './view/home';
 
-const rootElement = <MovieList />;
+const rootElement = <Home />;
 ReactDOM.render(rootElement,
   document.getElementById('root')
 );
