@@ -3,7 +3,7 @@ import { InputText } from 'primereact/inputtext';
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css"; 
-import { NavBar } from '../Component/navbar'
+import Navbar from '../component/navbar'
 
 
 export class Home extends React.Component<{}> {
@@ -14,8 +14,8 @@ export class Home extends React.Component<{}> {
         ]};
     }
     render(): React.ReactNode {
-        return <div>
-            {NavBar}
-        </div>
+        return (
+        <Navbar />
+        );
     }
 }

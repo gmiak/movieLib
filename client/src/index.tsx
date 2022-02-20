@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {Home} from './view/home';
+import { Home } from './view/home';
+import Navbar from './component/navbar';
 
 const rootElement = <Home />;
 ReactDOM.render(rootElement,
