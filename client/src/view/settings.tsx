@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export class Home extends React.Component<{}> {
+export class Settings extends React.Component<{}> {
     constructor(props : {}) {
         super(props);
         this.state = {movies : [
@@ -12,7 +12,7 @@ export class Home extends React.Component<{}> {
     render(): React.ReactNode {
         return (
         <div>
-            <h1>Home</h1>
+            <h1>Settings</h1>
         </div>
         );
     }

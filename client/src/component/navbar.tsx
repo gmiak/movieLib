@@ -9,7 +9,7 @@ import { TabMenu } from 'primereact/tabmenu';
 
 
 
-function Navbar() {
+export function Navbar() {
 
     const [activeIndex, setActiveIndex] = useState(3);
 
@@ -25,6 +25,7 @@ function Navbar() {
         <div>
             <div className="card">
                 <TabMenu model={items} />
+                
             </div>
         </div>
     );

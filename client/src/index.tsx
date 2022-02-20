@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Home } from './view/home';
+import { MainView } from './view/main';
 import Navbar from './component/navbar';
 
-const rootElement = <Home />;
+const rootElement = <MainView />;
 ReactDOM.render(rootElement,
   document.getElementById('root')
 );
