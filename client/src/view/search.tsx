@@ -3,17 +3,22 @@ import React from 'react';
 
 
 export class Search extends React.Component<{}> {
-    constructor(props : {}) {
+    constructor(props: {}) {
         super(props);
-        this.state = {movies : [
-            {id : 1, description : "Malala", titel: "hahah", year: "djd", genre: "jjdj", picture: "jjj", favorite: false}
-        ]};
+        this.state = {
+            movies: [
+                { id: 1, description: "Malala", titel: "hahah", year: "djd", genre: "jjdj", picture: "jjj", favorite: false }
+            ]
+        };
     }
     render(): React.ReactNode {
         return (
-        <div>
-            <h1>Search</h1>
-        </div>
+            <div>
+                <div className="card">
+                    <h5>Search</h5>
+                    
+                </div>
+            </div>
         );
     }
 }

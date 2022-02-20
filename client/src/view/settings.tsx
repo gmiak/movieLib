@@ -11,8 +11,11 @@ export class Settings extends React.Component<{}> {
     }
     render(): React.ReactNode {
         return (
-        <div>
-            <h1>Settings</h1>
+            <div>
+            <div className="card">
+                <h5>Settings</h5>
+                
+            </div>     
         </div>
         );
     }
