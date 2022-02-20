@@ -1,0 +1,13 @@
+.panelOne, .panelTwo {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.panelOne h6, .panelTwo h6 {
+    text-decoration: underline;
+}
+@media screen and (max-width: 600px) {
+    .panelTwo {
+      float: right;
+      display: block;
+    }
+  }

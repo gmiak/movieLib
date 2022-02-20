@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {MovieList} from './home';
+import { MainView } from './view/main';
+import Navbar from './component/navbar';
 
-const rootElement = <MovieList />;
+const rootElement = <MainView />;
 ReactDOM.render(rootElement,
   document.getElementById('root')
 );
