@@ -29,7 +29,7 @@ export class MovieService implements IMovieService {
      * The Singleton's constructor should always be private to prevent direct
      * construction calls with the `new` operator.
      */
-    public constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
+    private constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
         this.movies = movies;
         this.favoriteMovies = favoriteMovies;
     }
@@ -38,7 +38,7 @@ export class MovieService implements IMovieService {
         if (!MovieService.instance) {
             MovieService.instance = new MovieService({}, {});
         }
-
+        
         return MovieService.instance;
     }
 
@@ -114,12 +114,15 @@ export class MovieService implements IMovieService {
 
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService(): MovieService {
-    //return MovieService.getInstance();
-    return new MovieService({
+    return MovieService.getInstance();
+    /*return new MovieService({
         1: { id: 1, titel: "Spiderman", year: "2005", description: "Great shit", picture: "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", genre: "Action", favorite: false },
         2: { id: 1, titel: "Superman", year: "1990", description: "Shit shit", picture: "https://pngimg.com/uploads/superman/superman_PNG15.png", genre: "Action", favorite: true }
+
+        "id": 1, "titel": "Spiderman", "year": "2005", "description": "Great shit", "picture": "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", "genre": "Action", "favorite": false 
+        "id": 2, "titel": "Superman", "year": "1990", "description": "Shit shit", "picture": "https://pngimg.com/uploads/superman/superman_PNG15.png", "genre": "Action", "favorite": true 
     },
-        {});
+        {});*/
 }
 
 

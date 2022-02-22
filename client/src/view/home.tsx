@@ -22,16 +22,36 @@ export class Home extends Component<{}, { movies: Movie[] }> {
        
     }
 
-    // Fetch data from backend
     override async componentDidMount() {
+        // TODO: Extract hostname
+        // TODO: Handle timeout? (primereact does this one)
+        this.refreshMovieList();
+
+    }
+
+    // Adds movie to favorite list
+    private async addMovieToFavorite(id : number) {
+        await axios.put<never>("http://localhost:8080/movie/favorite/" + id);
+        this.refreshMovieList();
+    }
+    // Deletes movie from favorite-list
+    private async deleteMovieFromFavorite(id : number) {
+        await axios.delete<never>("http://localhost:8080/movie/favorite/" + id);
+        this.refreshMovieList();
+    }
+    // Deletes movie from movie-list
+    private async deleteMovie(id : number) {
+        await axios.delete<never>("http://localhost:8080/movie/" + id);
+        this.refreshMovieList();
+    }
+    // Fetchs data from backend
+    private async refreshMovieList() {
         const res: AxiosResponse<Movie[]> = await axios.get("http://localhost:8080/movie"); // TODO: Extract the hostname & Handle timeout
-        setTimeout(() => {
-            this.setState({ movies: res.data });
-        }, 100);
+        this.setState({ movies: res.data });
     }
    
-
-    itemTemplate(data: any) {
+    // Template for movie-items -- TODO: Create a class of this and n other class for components in render-function below
+    private itemTemplate(data: any) {
         return (
             <div className="product-item">
                 <img src={data.picture} alt={data.picture} />
@@ -39,7 +59,7 @@ export class Home extends Component<{}, { movies: Movie[] }> {
                     <div className="product-name">
                         {data.titel + " "}
                         {data.favorite ?
-                        <><i className="pi pi-heart product-category-icon"></i></>
+                        <><i className="pi pi-heart product-category-icon" ></i></>
                         :
                         <><i></i></>
                     }
@@ -53,9 +73,9 @@ export class Home extends Component<{}, { movies: Movie[] }> {
 
                 <div className="product-action">
                     {data.favorite ?
-                        <><Button icon="pi pi-thumbs-down" label="Unlike" onClick={() => {const tmp = this.state.movies; data.favorite = false; tmp[data.id] = data; this.setState({ movies: tmp });} }></Button></>
+                        <><p><Button label="" icon="pi pi-trash" onClick={ (event) => {this.deleteMovie(data.id)} }/></p><Button icon="pi pi-thumbs-down" label="Unlike" onClick={ (event) => {this.deleteMovieFromFavorite(data.id)} }></Button></>
                         :
-                        <><Button icon="pi pi-thumbs-up" label="Like" onClick={() => {const tmp = this.state.movies; data.favorite = true; tmp[data.id] = data; this.setState({ movies: tmp });} }></Button></>
+                        <><p><Button label="" icon="pi pi-trash" onClick={ (event) => {this.deleteMovie(data.id)} }/></p><Button icon="pi pi-thumbs-up" label="Like" onClick={ (event) => {this.addMovieToFavorite(data.id)} }></Button></>
                     }
 
                 </div>
