@@ -1,0 +1,16 @@
+.panelOneMovies, .panelTwoMovies{
+    width: 49%;
+}
+.panelOneMovies {
+    border-color: #e8e8e8;
+}
+.panelTwoMovies{
+    border-color: #e8e8e8;
+}
+
+@media screen and (max-width: 452px) {
+    .panelOne, .panelTwo {
+        float: none;
+        width: 100%;
+    }
+  }

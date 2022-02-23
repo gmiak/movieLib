@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { MainView } from './view/main';
-import Navbar from './component/navbar';
 
 const rootElement = <MainView />;
 ReactDOM.render(rootElement,
