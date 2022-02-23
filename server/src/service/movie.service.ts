@@ -115,14 +115,21 @@ export class MovieService implements IMovieService {
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService(): MovieService {
     return MovieService.getInstance();
-    /*return new MovieService({
-        1: { id: 1, titel: "Spiderman", year: "2005", description: "Great shit", picture: "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", genre: "Action", favorite: false },
+}
+
+
+/**
+ * Exmpel for movies
+ * 1: { id: 1, titel: "Spiderman", year: "2005", description: "Great shit", picture: "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", genre: "Action", favorite: false },
         2: { id: 1, titel: "Superman", year: "1990", description: "Shit shit", picture: "https://pngimg.com/uploads/superman/superman_PNG15.png", genre: "Action", favorite: true }
 
         "id": 1, "titel": "Spiderman", "year": "2005", "description": "Great shit", "picture": "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", "genre": "Action", "favorite": false 
         "id": 2, "titel": "Superman", "year": "1990", "description": "Shit shit", "picture": "https://pngimg.com/uploads/superman/superman_PNG15.png", "genre": "Action", "favorite": true 
-    },
-        {});*/
-}
+ */
 
-
+/**
+ *  Movie picture link
+ *  https://pngimg.com/uploads/superman/superman_PNG15.png
+ *  https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png
+ *  https://static.posters.cz/image/1300/art-photo/the-batman-2022-i120285.jpg
+ */

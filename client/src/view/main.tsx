@@ -9,10 +9,8 @@ import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { PanelMenu } from 'primereact/panelmenu';
 import { Divider } from 'primereact/divider';
-import { Search } from './search';
-import { Exit } from './exit';
-import { Settings } from './settings';
-import { Profile } from './profile';
+import { MyMovies } from './movies';
+import { About } from './about';
 
 
 export class MainView extends Component {
@@ -31,13 +29,9 @@ export class MainView extends Component {
             case 0:
                 return <Home />;
             case 1:
-                return <Search />;
+                return <MyMovies />;
             case 2:
-                return <Profile />;
-            case 3:
-                return <Settings />;
-            case 4:
-                return <Exit />;
+                return <About />;
             default:
                 return <Home />;
         }
@@ -50,10 +44,8 @@ export class MainView extends Component {
 
         const items = [
             { label: 'Home', icon: 'pi pi-fw pi-home', command:() => {this.index=0; setVisibleRight(false)}},
-            { label: 'Search', icon: 'pi pi-fw pi-search', command:() => {this.index=1; setVisibleRight(false)} },
-            { label: 'Profile', icon: 'pi pi-fw pi-user',command:() => {this.index=2; setVisibleRight(false)} },
-            { label: 'Settings', icon: 'pi pi-fw pi-cog', command:() => {this.index=3; setVisibleRight(false)} },
-            { label: 'Exit', icon: 'pi pi-fw pi-power-off', command:() => {this.index=4; setVisibleRight(false)} },
+            { label: 'Movies', icon: 'pi pi-fw pi-list', command:() => {this.index=1; setVisibleRight(false)} },
+            { label: 'About', icon: 'pi pi-fw pi-info-circle', command:() => {this.index=1; setVisibleRight(false)} },
         ];
   
         return (
@@ -89,10 +81,10 @@ export class MainView extends Component {
                 <footer>
                     <div className='footer'>
                         <p>Follow MovieLib on</p>
-                        <i className="pi pi-facebook" ></i>
-                        <i className="pi pi-instagram" ></i>
-                        <i className="pi pi-twitter" ></i>
-                        <i className="pi pi-github" ></i>
+                        <a href='https://www.facebook.com/mr.gmiak.dv/'><i className="pi pi-facebook" ></i></a>
+                        <a href='https://www.instagram.com/gmiak.dv/'><i className="pi pi-instagram" ></i></a>
+                        <a href='https://twitter.com/gmiak_dv'><i className="pi pi-twitter" ></i></a>
+                        <a href='https://github.com//gmiak'><i className="pi pi-github" ></i></a>
                         <p className='copyright'>2022 &copy; gmiak.dv, All rights reserved.</p>
                     </div>
                 </footer>

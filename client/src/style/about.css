@@ -1,0 +1,11 @@
+.about {
+    width: 100%;
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    text-align: center;
+}
+.about img {
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+}

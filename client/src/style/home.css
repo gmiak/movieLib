@@ -5,18 +5,19 @@
 .panelOne {
   width: 32%;
   float: left;
-  border: 1px solid blue;
+  border: 1px solid #e8e8e8;
 }
 .panelTwo {
   width: 66%;
   float: left;
-  border: 1px solid green;
+  border: 1px solid #e8e8e8;
   margin-left: 2%;
 }
 .panelOne, .panelTwo {
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 15;
+  border-radius: 10px;
 }
 .panelOne h6, .panelTwo h6 {
     text-decoration: underline;
