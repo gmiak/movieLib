@@ -1,7 +1,7 @@
 import Express from "express";
 import { Movie } from "../model/movie.interface";
-import { IMovieService, makeMovieService, MovieService } from "../service/movie.service";
-
+import { makeMovieService, MovieService } from "../service/movie.service";
+import { IMovieService } from "../service/imovie.service";
 /** Router is an express server */
 /** For Movie in general */
 

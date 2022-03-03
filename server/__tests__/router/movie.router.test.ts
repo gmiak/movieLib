@@ -1,6 +1,7 @@
 import { Movie } from "../../src/model/movie.interface";
 import { makeMovieRouter } from "../../src/router/movie.router";
-import { MovieService, makeMovieService, IMovieService } from "../../src/service/movie.service";
+import { MovieService, makeMovieService } from "../../src/service/movie.service";
+import { IMovieService } from "../../src/service/imovie.service";
 import SuperTest from "supertest";
 import {Express } from "express";
 import { error } from "console";
