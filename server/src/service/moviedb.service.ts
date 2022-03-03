@@ -1,49 +1,27 @@
 import { Movie } from "../model/movie.interface";
 import { IMovieService } from "./imovie.service";
-import { connect, Schema, model } from "mongoose";
+import { connect, Schema, model, Model } from "mongoose";
+import { connectToDatabase } from "../db/movie.db";
 
-connect("mongodb+srv://gmiak:suede2011@movielib.eexy9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
-const movieSchema: Schema = new Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    titel: {
-        type: String,
-        required: true,
-    },
-    year: {
-        type: String,
-    },
-    description: {
-        type: String,
-    },
-    picture: {
-        type: String,
-    },
-    genre: {
-        type: String,
-    },
-    favorite: {
-        type: Boolean,
-    },
+class MovieDBService implements IMovieService {
 
-});
+    private movieModel : Model<Movie>;
+    private favoriteMovieModel : Model<Movie>;
 
-const movieModel = model<Movie>("MovieLib", movieSchema);
-const movieFavoriteModel = model<Movie>("MovieLibFavorite", movieSchema);
+    constructor(movieModel : Model<Movie>) {
+        this.movieModel = movieModel;
+        this.favoriteMovieModel = movieModel;
+    }
 
-export class MovieDBService implements IMovieService {
     async getMovies(): Promise<Movie[]> {
-        return await movieModel.find();
+        return await this.movieModel.find();
     }
     async getFavoriteMovies(): Promise<Movie[]> {
-        return await movieFavoriteModel.find();
+        return await this.favoriteMovieModel.find();
     }
     async createMovie(titel: string, year: string, description: string, picture: string, genre: string): Promise<Movie> {
-        return await movieModel.create({
+        return await this.movieModel.create({
             id: new Date().valueOf(),
             titel: titel,
             year: year,
@@ -63,4 +41,8 @@ export class MovieDBService implements IMovieService {
         throw new Error("Method not implemented.");
     }
 
+}
+
+export async function movieDBService() : Promise<IMovieService> {
+    return new MovieDBService(await connectToDatabase());
 }

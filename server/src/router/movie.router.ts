@@ -1,19 +1,19 @@
 import Express from "express";
 import { Movie } from "../model/movie.interface";
-import { makeMovieService, MovieService } from "../service/movie.service";
 import { IMovieService } from "../service/imovie.service";
-import { MovieDBService } from "../service/moviedb.service";
+import { movieDBService } from "../service/moviedb.service";
 /** Router is an express server */
 /** For Movie in general */
 
 // Using Dependency Injection
-export function makeMovieRouter(movieService : IMovieService) : Express.Express {
+export function makeMovieRouter(movieService : Promise<IMovieService>) : Express.Express {
     const movieRouter : Express.Express = Express();
 
     // Get /movie router
     movieRouter.get("/", async (req: Express.Request, res: Express.Response) => {
         try {
-            const movies : Array<Movie> = await movieService.getMovies();
+            const ms = await movieService;
+            const movies : Array<Movie> = await ms.getMovies();
             //res.status(200).send(JSON.stringify(movies)) // if i didn't specify in index.ts to get all in json
             res.status(200).send(movies); 
         } catch (e : any) {
@@ -34,7 +34,8 @@ export function makeMovieRouter(movieService : IMovieService) : Express.Express 
                 res.status(400).send("Missing titel");
                 return;
             }
-            const movie : Movie = await movieService.createMovie(titel, year, description, picture, genre);
+            const ms = await movieService;
+            const movie : Movie = await ms.createMovie(titel, year, description, picture, genre);
             res.status(201).send(movie);
         } catch (e : any) {
             res.status(500).send(e.message);
@@ -45,8 +46,9 @@ export function makeMovieRouter(movieService : IMovieService) : Express.Express 
 
     movieRouter.delete("/:id", async (req: Express.Request, res: Express.Response) => {
         try {
+            const ms = await movieService;
             const id : number = parseInt(req.params.id, 10);
-            const completed : boolean = await movieService.delMovie(id);
+            const completed : boolean = await ms.delMovie(id);
             if (! completed) {
                 res.status(400).send(`No movie with id ${id}\n`);
                 return;
@@ -61,5 +63,5 @@ export function makeMovieRouter(movieService : IMovieService) : Express.Express 
 }
 
 export function makeDefaultMovieRouter() : Express.Express {
-    return makeMovieRouter(new MovieDBService());
+    return makeMovieRouter(movieDBService());
 }
