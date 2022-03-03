@@ -2,6 +2,7 @@ import Express from "express";
 import { Movie } from "../model/movie.interface";
 import { makeMovieService, MovieService } from "../service/movie.service";
 import { IMovieService } from "../service/imovie.service";
+import { MovieDBService } from "../service/moviedb.service";
 /** Router is an express server */
 /** For Movie in general */
 
@@ -60,5 +61,5 @@ export function makeMovieRouter(movieService : IMovieService) : Express.Express 
 }
 
 export function makeDefaultMovieRouter() : Express.Express {
-    return makeMovieRouter(makeMovieService());
+    return makeMovieRouter(new MovieDBService());
 }

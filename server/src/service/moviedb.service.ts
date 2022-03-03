@@ -1,45 +1,57 @@
 import { Movie } from "../model/movie.interface";
 import { IMovieService } from "./imovie.service";
-import { connect, Schema } from "mongoose";
+import { connect, Schema, model } from "mongoose";
 
-connect ("mongodb+srv://gmiak:suede2011@movielib.eexy9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+connect("mongodb+srv://gmiak:suede2011@movielib.eexy9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
-const movieSchema : Schema = new Schema({
-    id : {
-        type : Number,
-        required : true,
-        unique : true
+const movieSchema: Schema = new Schema({
+    id: {
+        type: Number,
+        required: true,
+        unique: true
     },
-    titel : {
-        type : String,
-        required : true,
+    titel: {
+        type: String,
+        required: true,
     },
-    year : {
-        type : String,
+    year: {
+        type: String,
     },
-    description : {
-        type : String,
+    description: {
+        type: String,
     },
-    picture : {
-        type : String,
+    picture: {
+        type: String,
     },
-    genre : {
-        type : String,
+    genre: {
+        type: String,
     },
-    favorite : {
-        type : Boolean,
+    favorite: {
+        type: Boolean,
     },
 
-})
-class MovieDBService implements IMovieService {
-    getMovies(): Promise<Movie[]> {
-        throw new Error("Method not implemented.");
+});
+
+const movieModel = model<Movie>("MovieLib", movieSchema);
+const movieFavoriteModel = model<Movie>("MovieLibFavorite", movieSchema);
+
+export class MovieDBService implements IMovieService {
+    async getMovies(): Promise<Movie[]> {
+        return await movieModel.find();
     }
-    getFavoriteMovies(): Promise<Movie[]> {
-        throw new Error("Method not implemented.");
+    async getFavoriteMovies(): Promise<Movie[]> {
+        return await movieFavoriteModel.find();
     }
-    createMovie(titel: string, year: string, description: string, picture: string, genre: string): Promise<Movie> {
-        throw new Error("Method not implemented.");
+    async createMovie(titel: string, year: string, description: string, picture: string, genre: string): Promise<Movie> {
+        return await movieModel.create({
+            id: new Date().valueOf(),
+            titel: titel,
+            year: year,
+            description: description,
+            picture: picture,
+            genre: genre,
+            favorite: false
+        });
     }
     isFavorite(id: number): Promise<boolean> {
         throw new Error("Method not implemented.");
@@ -50,5 +62,5 @@ class MovieDBService implements IMovieService {
     delMovie(id: number): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    
+
 }
