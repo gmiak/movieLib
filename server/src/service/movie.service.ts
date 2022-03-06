@@ -1,34 +1,15 @@
 import { Movie } from "../model/movie.interface";
 import { IMovieService } from "./imovie.service";
 
-/**
- *  The Singleton class defines the `getInstance` method that lets clients access
- * the unique singleton instance. 
- */
 export class MovieService implements IMovieService {
-    private static instance: MovieService;
 
     private movies: { [key: number]: Movie };
-
     private favoriteMovies: { [key: number]: Movie };
 
-    /**
-     * The Singleton's constructor should always be private to prevent direct
-     * construction calls with the `new` operator.
-     */
-    private constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
+    constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
         this.movies = movies;
         this.favoriteMovies = favoriteMovies;
     }
-
-    public static getInstance(): MovieService {
-        if (!MovieService.instance) {
-            MovieService.instance = new MovieService({}, {});
-        }
-        
-        return MovieService.instance;
-    }
-
     // GET Movies
     getMovies: () => Promise<Array<Movie>> = async () => {
         return Object.values(this.movies);
