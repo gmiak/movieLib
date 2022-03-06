@@ -1,8 +1,7 @@
 import * as MS from "../../src/service/movie.service";
 import { Movie } from "../../src/model/movie.interface";
-import { IMovieService, makeMovieService, MovieService } from "../../src/service/movie.service";
-
-
+import { makeMovieService, MovieService } from "../../src/service/movie.service";
+import { IMovieService } from "../../src/service/imovie.service";
 
 /*test("getMovies when movie list is empty should return the empty list", () => {
     const movieService = new MS.MovieService({}, {});

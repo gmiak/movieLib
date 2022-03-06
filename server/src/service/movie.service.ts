@@ -1,59 +1,20 @@
 import { Movie } from "../model/movie.interface";
+import { IMovieService } from "./imovie.service";
 
-/**
- * All things that depend on Class MovieService,
- * should be much better that they depend on IMovieService
- */
-export interface IMovieService {
-    getMovies(): Promise<Array<Movie>>
-    getFavoriteMovies(): Promise<Array<Movie>>
-    createMovie(titel: string, year: string, description: string, picture: string, genre: string): Promise<Movie>
-    isFavorite(id: number): Promise<boolean>
-    notFavorite(id: number): Promise<boolean>
-    delMovie(id: number): Promise<boolean>
-
-}
-
-/**
- *  The Singleton class defines the `getInstance` method that lets clients access
- * the unique singleton instance. 
- */
 export class MovieService implements IMovieService {
-    private static instance: MovieService;
 
     private movies: { [key: number]: Movie };
-
-    private favoriteMovies: { [key: number]: Movie };
-
-    /**
-     * The Singleton's constructor should always be private to prevent direct
-     * construction calls with the `new` operator.
-     */
-    private constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
+    
+    constructor(movies: { [key: number]: Movie }, favoriteMovies: { [key: number]: Movie }) {
         this.movies = movies;
-        this.favoriteMovies = favoriteMovies;
     }
-
-    public static getInstance(): MovieService {
-        if (!MovieService.instance) {
-            MovieService.instance = new MovieService({}, {});
-        }
-        
-        return MovieService.instance;
+    getFavoriteMovies(): Promise<Movie[]> {
+        throw new Error("Method not implemented.");
     }
-
     // GET Movies
     getMovies: () => Promise<Array<Movie>> = async () => {
         return Object.values(this.movies);
     }
-
-    // GET Favorite Movies
-    getFavoriteMovies: () => Promise<Array<Movie>> = async () => {
-        return Object.values(this.favoriteMovies);
-    }
-
-    // TODO: Create a list for favorite movies
-
     // POST
     createMovie: (titel: string, year: string, description: string, picture: string, genre: string) => Promise<Movie> =
         async (titel: string, year: string, description: string, picture: string, genre: string) => {
@@ -79,7 +40,6 @@ export class MovieService implements IMovieService {
                 return false;
             }
             movie.favorite = true;
-            this.favoriteMovies[movie.id] = movie;
             return true;
         }
 
@@ -91,7 +51,6 @@ export class MovieService implements IMovieService {
                 return false;
             }
             movie.favorite = false;
-            delete this.favoriteMovies[movie.id];
             return true;
         }
 
@@ -102,11 +61,6 @@ export class MovieService implements IMovieService {
             if (!movie) {
                 return false;
             }
-            const isFavorit: Movie = this.favoriteMovies[movie.id];
-            if (isFavorit) {
-                delete this.favoriteMovies[movie.id];
-            }
-            movie.favorite = false;
             delete this.movies[movie.id];
             return true;
         }
@@ -114,22 +68,6 @@ export class MovieService implements IMovieService {
 
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService(): MovieService {
-    return MovieService.getInstance();
+    return new MovieService({}, {});
 }
 
-
-/**
- * Exmpel for movies
- * 1: { id: 1, titel: "Spiderman", year: "2005", description: "Great shit", picture: "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", genre: "Action", favorite: false },
-        2: { id: 1, titel: "Superman", year: "1990", description: "Shit shit", picture: "https://pngimg.com/uploads/superman/superman_PNG15.png", genre: "Action", favorite: true }
-
-        "id": 1, "titel": "Spiderman", "year": "2005", "description": "Great shit", "picture": "https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png", "genre": "Action", "favorite": false 
-        "id": 2, "titel": "Superman", "year": "1990", "description": "Shit shit", "picture": "https://pngimg.com/uploads/superman/superman_PNG15.png", "genre": "Action", "favorite": true 
- */
-
-/**
- *  Movie picture link
- *  https://pngimg.com/uploads/superman/superman_PNG15.png
- *  https://i.pinimg.com/originals/25/5f/03/255f03c13b95d9b60130c3e0139e21c5.png
- *  https://static.posters.cz/image/1300/art-photo/the-batman-2022-i120285.jpg
- */

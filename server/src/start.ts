@@ -1,5 +1,4 @@
 import Express from "express";
-import { makeDefaultFavoriteMovieRouter } from "./router/favoriteMovie.router";
 import { makeDefaultMovieRouter } from "./router/movie.router";
 import * as path from "path";
 import * as cors from "cors";
@@ -17,4 +16,3 @@ app.get('/', (req : Express.Request, res : Express.Response) => {
 
 app.use(Express.json())  // Returns all i ask in json
 app.use("/movie", makeDefaultMovieRouter());
-app.use("/movie/favorite", makeDefaultFavoriteMovieRouter());
