@@ -1,9 +1,5 @@
 import { Movie } from "../model/movie.interface";
 
-/**
- * All things that depend on Class MovieService,
- * should be much better that they depend on IMovieService
- */
  export interface IMovieService {
     getMovies(): Promise<Array<Movie>>
     getFavoriteMovies(): Promise<Array<Movie>>

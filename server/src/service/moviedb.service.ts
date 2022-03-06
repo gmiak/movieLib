@@ -1,27 +1,27 @@
 import { Movie } from "../model/movie.interface";
 import { IMovieService } from "./imovie.service";
-import { connect, Schema, model, Model } from "mongoose";
-import { connectToDatabase } from "../db/movie.db";
+import { movieModel } from "../db/movie.db";
 
 
 class MovieDBService implements IMovieService {
-
-    private movieModel : Model<Movie>;
-    private favoriteMovieModel : Model<Movie>;
-
-    constructor(movieModel : Model<Movie>) {
-        this.movieModel = movieModel;
-        this.favoriteMovieModel = movieModel;
-    }
-
+    
     async getMovies(): Promise<Movie[]> {
-        return await this.movieModel.find();
+        const mm = await movieModel;
+        return await mm.find();
     }
+
     async getFavoriteMovies(): Promise<Movie[]> {
-        return await this.favoriteMovieModel.find();
+        const mm = await movieModel;
+        return await mm.find(
+            {
+                favorite : true
+            }
+        );
     }
+
     async createMovie(titel: string, year: string, description: string, picture: string, genre: string): Promise<Movie> {
-        return await this.movieModel.create({
+        const mm = await movieModel;
+        return await mm.create({
             id: new Date().valueOf(),
             titel: titel,
             year: year,
@@ -31,18 +31,31 @@ class MovieDBService implements IMovieService {
             favorite: false
         });
     }
-    isFavorite(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async isFavorite(id: number): Promise<boolean> {
+        const mm = await movieModel;
+        const result = await mm.updateOne(
+            {id : id},
+            {favorite : true}
+        );
+        return (result.matchedCount === 1);
     }
-    notFavorite(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async notFavorite(id: number): Promise<boolean> {
+        const mm = await movieModel;
+        const result = await mm.updateOne(
+            {id : id},
+            {favorite : false}
+        );
+        return (result.matchedCount === 1);
     }
-    delMovie(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async delMovie(id: number): Promise<boolean> {
+        const mm = await movieModel;
+        const result = await mm.deleteOne(
+            {id : id},
+            {favorite : false}
+        );
+        return (result.deletedCount === 1);
     }
 
 }
 
-export async function movieDBService() : Promise<IMovieService> {
-    return new MovieDBService(await connectToDatabase());
-}
+export const movieDBService = new MovieDBService();
