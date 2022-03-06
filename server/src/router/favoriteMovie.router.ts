@@ -57,7 +57,6 @@ export function makeFavoriteMovieRouter (movieService: Promise<IMovieService> ) 
 }
 
 export function makeDefaultFavoriteMovieRouter() : Express.Express {
-    //return makeFavoriteMovieRouter(movieDBService());
-    return makeDefaultFavoriteMovieRouter();
+    return makeFavoriteMovieRouter(movieDBService());
 }
 
