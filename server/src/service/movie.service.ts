@@ -82,7 +82,7 @@ export class MovieService implements IMovieService {
 
 // Factoring methode which create a MovieService with empty list of movies
 export function makeMovieService(): MovieService {
-    return MovieService.getInstance();
+    return new MovieService({}, {});
 }
 
 
